@@ -1,0 +1,132 @@
+openapi: 3.0.3
+info:
+  version: 1.0.0
+  title: Restmenu REST interface
+  description: >
+    This interface description describes the Restmenu REST internal interface.
+tags:
+  - name: Restmenu
+    description: Restmenu REST interface.
+
+paths:
+  /users:
+    get:
+      operationId: getUsers
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserDto'
+  /users/{username}:
+    get:
+      operationId: getUserByUsername
+      parameters:
+        - name: username
+          in: path
+          required: true
+          schema:
+            type: string
+            default: max
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserDto"
+        404:
+          description: Entity with specified ID not found
+
+servers:
+  - url: http://localhost/api/v1
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+
+    EntityDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 123
+        created:
+          type: string
+          format: date-time
+          example: 2017-07-21T17:32:28Z
+        lastModified:
+          type: string
+          format: date-time
+          example: 2017-07-21T17:32:28Z
+
+    UserDto:
+      allOf:
+        - $ref: '#/components/schemas/EntityDto'
+        - type: object
+          properties:
+            username:
+              type: string
+              example: max
+            contact:
+              $ref: '#/components/schemas/ContactDto'
+            state:
+              type: string
+              example: REGISTERED
+
+    ContactDto:
+      type: object
+      properties:
+        salutation:
+          type: string
+          maxLength: 150
+          example: Mr
+        firstName:
+          type: string
+          maxLength: 150
+          example: John
+        lastName:
+          type: string
+          maxLength: 150
+          example: Doe
+        phone1:
+          $ref: '#/components/schemas/PhoneNumber'
+        phone2:
+          $ref: '#/components/schemas/PhoneNumber'
+        eMail1:
+          $ref: '#/components/schemas/EmailAddress'
+        eMail2:
+          $ref: '#/components/schemas/EmailAddress'
+        website:
+          $ref: '#/components/schemas/Website'
+
+    PhoneNumber:
+      type: string
+      pattern: '\\+[ 0-9]{1,19}'
+      description: Phonenumber represented in international format
+      example: +49 123 1234567
+
+    EmailAddress:
+      type: string
+      pattern: '([a-zA-Z0-9_\\-&\\.])+@[a-zA-Z0-9]([a-zA-Z0-9_\\-&])*\\.([a-zA-Z0-9_\\-&](\\.)?)*([a-zA-Z0-9])+'
+      maxLength: 255
+      description: An email address
+      example: info@dg.nl
+
+    Website:
+      type: string
+      pattern: '(https?:\/\/)?(www\.)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)|(https?:\/\/)?(www\.)?(?!ww)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)'
+      maxLength: 255
+      description: A website
+      example: https://www.test.com
+
+security:
+  - bearerAuth: []

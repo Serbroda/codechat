@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>codechat-sdk-angular</artifactId>
+
+    <parent>
+        <artifactId>codechat</artifactId>
+        <groupId>de.rottstegge</groupId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.openapitools</groupId>
+                <artifactId>openapi-generator-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>generate-sources</phase>
+                        <id>openapi-generator-generate</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <configOptions>
+                                <apiModulePrefix>restmenu</apiModulePrefix>
+                                <npmName>codechat-sdk-angular</npmName>
+                                <!--<npmRepository>http://my.custom.repo</npmRepository>-->
+                                <npmVersion>1.0.0</npmVersion>
+                                <providedInRoot>true</providedInRoot>
+                                <snapshot>false</snapshot>
+                                <sortParamsByRequiredFlag>true</sortParamsByRequiredFlag>
+                                <stringEnums>false</stringEnums>
+                            </configOptions>
+                            <generatorName>typescript-angular</generatorName>
+                            <inputSpec>${basedir}/../openapi/codechat-v1.yml</inputSpec>
+                            <output>target/generated-sources</output>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>com.github.eirslett</groupId>
+                <artifactId>frontend-maven-plugin</artifactId>
+                <configuration>
+                    <workingDirectory>target/generated-sources</workingDirectory>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>install node and npm</id>
+                        <goals>
+                            <goal>install-node-and-npm</goal>
+                            <goal>npm</goal>
+                        </goals>
+                        <phase>generate-resources</phase>
+                        <configuration>
+                            <nodeVersion>v14.15.5</nodeVersion>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>npm-run-build</id>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+                        <configuration>
+                            <arguments>run build</arguments>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
