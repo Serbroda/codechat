@@ -299,3 +299,5 @@ dist
 # .pnp.*
 
 # End of https://www.toptal.com/developers/gitignore/api/git,maven,node,visualstudiocode,intellij+all,yarn,java
+
+codechat-client/node
