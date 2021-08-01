@@ -22,6 +22,7 @@
 	<modules>
         <module>codechat-sdk-server</module>
 		<module>codechat-sdk-angular</module>
+		<module>codechat-client</module>
 		<module>codechat-webapp</module>
 	</modules>
 
