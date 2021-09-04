@@ -67,6 +67,19 @@
 				<artifactId>validation-api</artifactId>
 				<version>2.0.1.Final</version>
 			</dependency>
+
+			<!-- Java API -->
+			<dependency>
+				<groupId>com.github.paulcwarren</groupId>
+				<artifactId>content-fs-spring-boot-starter</artifactId>
+				<version>0.6.0</version>
+			</dependency>
+			<!-- REST API -->
+			<dependency>
+				<groupId>com.github.paulcwarren</groupId>
+				<artifactId>spring-content-rest-boot-starter</artifactId>
+				<version>0.6.0</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 

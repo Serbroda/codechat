@@ -66,6 +66,17 @@
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<!-- Java API -->
+		<dependency>
+			<groupId>com.github.paulcwarren</groupId>
+			<artifactId>content-fs-spring-boot-starter</artifactId>
+		</dependency>
+		<!-- REST API -->
+		<dependency>
+			<groupId>com.github.paulcwarren</groupId>
+			<artifactId>spring-content-rest-boot-starter</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
