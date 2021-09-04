@@ -1,0 +1,21 @@
+{
+  "name": "codechat",
+  "private": true,
+  "author": "Serbroda",
+  "license": "ISC",
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ],
+    "nohoist": []
+  },
+  "scripts": {
+    "postinstall": "lerna bootstrap --use-workspaces"
+  },
+  "devDependencies": {
+    "lerna": "^4.0.0",
+    "prettier": "^2.3.2",
+    "rimraf": "^3.0.2",
+    "typescript": "^4.4.2"
+  }
+}
