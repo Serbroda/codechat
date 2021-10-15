@@ -23,7 +23,7 @@ export default class Server {
     const router = new Router();
     await bootstrapControllers(router);
     this._app.use(router.routes());
-    router.stack.map((r) => r.path).forEach((r) => console.log(`   => ${r}`));
+    router.stack.forEach((r) => console.log(`   => ${r.path}`));
 
     this._server = this._app.listen(this._props.port);
     console.log(`Server listening on http://localhost:${this._props.port}`);
